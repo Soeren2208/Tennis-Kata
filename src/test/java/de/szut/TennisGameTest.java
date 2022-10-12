@@ -4,7 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TennisGameTest {
 
@@ -32,7 +34,20 @@ public class TennisGameTest {
         this.game.makePoint("Federer");
         this.game.makePoint("Federer");
         assertThat(this.game.getResult(), is("30 love"));
+    }
 
+    @Test
+    public void givenBothPlayersWonPoints_WhenGetResult_Then30_15(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        assertThat(this.game.getResult(), is("30 15"));
+    }
+
+    @Test
+    public void givenWrongPlayerName_WhenMakePoint_ThenThrowIllegalArgumentException(){
+        Exception e = assertThrows(IllegalArgumentException.class, ()-> this.game.makePoint("falscher Name"));
+        assertThat(e.getMessage(), is(equalTo("Wrong playername!")));
     }
 
 

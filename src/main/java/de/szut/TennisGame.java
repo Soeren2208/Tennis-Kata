@@ -49,5 +49,11 @@ public class TennisGame {
         if(playerName.equals(this.servicePlayer)){
             this.pointsServicePlayer++;
         }
+        else if(playerName.equals(this.returnPlayer)){
+            this.pointsReturnPlayer++;
+        }
+        else{
+            throw new IllegalArgumentException("Wrong playername!");
+        }
     }
 }
