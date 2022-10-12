@@ -36,7 +36,7 @@ public class TennisGame {
         String result;
 
         if(isWin()){
-            result = "Game " + getWinPlayerName();
+            result = "Game " + getPlayerNameWhoscoredMore();
         }
         else if(isDeuce()){
             result = "Deuce";
@@ -44,17 +44,24 @@ public class TennisGame {
         else if(isDraw()){
             result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
         }
+        else if(isAdvantage()){
+            result = "Advantage "+ getPlayerNameWhoscoredMore();
+        }
         else{
             result = this.scoreMap.get(this.pointsServicePlayer) + " " + this.scoreMap.get(this.pointsReturnPlayer);
         }
         return result;
     }
 
+    private boolean isAdvantage(){
+        return Math.abs(this.pointsServicePlayer - this.pointsReturnPlayer)==1 && this.pointsServicePlayer>=3;
+    }
+
     private boolean isDeuce() {
         return this.pointsServicePlayer == this.pointsReturnPlayer && this.pointsServicePlayer>=3;
     }
 
-    private String getWinPlayerName() {
+    private String getPlayerNameWhoscoredMore() {
         if(this.pointsServicePlayer> this.pointsReturnPlayer){
             return this.servicePlayer;
         }
@@ -68,7 +75,15 @@ public class TennisGame {
     }
 
     private boolean isWin(){
-        return this.pointsServicePlayer ==4 && this.pointsReturnPlayer<3 || this.pointsServicePlayer <3 && this.pointsReturnPlayer==4;
+        return isWinAfterAdvantage() || isNormalWin();
+    }
+
+    private boolean isWinAfterAdvantage() {
+        return Math.abs(this.pointsServicePlayer - this.pointsReturnPlayer) >=2 && (this.pointsServicePlayer >=4 || this.pointsReturnPlayer>=4);
+    }
+
+    private boolean isNormalWin() {
+        return this.pointsServicePlayer ==4 && this.pointsReturnPlayer <=2 || (this.pointsServicePlayer <=2 && this.pointsReturnPlayer ==4);
     }
 
     public void makePoint(String playerName) {

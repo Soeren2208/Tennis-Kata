@@ -72,4 +72,31 @@ public class TennisGameTest {
         assertThat(this.game.getResult(), is(equalTo("Deuce")));
     }
 
+    @Test
+    public void givenAdventage_WhenGetResult_ThenAdvantage(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        assertThat(this.game.getResult(), is(equalTo("Advantage Nadal")));
+    }
+
+    @Test
+    public void givenWinAfterAdventage_WhenGetResult_ThenGame(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        assertThat(this.game.getResult(), is(equalTo("Game Nadal")));
+    }
+
+
+
 }
