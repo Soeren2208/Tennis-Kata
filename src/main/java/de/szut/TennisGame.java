@@ -2,11 +2,29 @@ package de.szut;
 
 public class TennisGame {
 
-    public TennisGame(String playerToServe, String playerToReturn){
+    String servicePlayer;
+    String returnPlayer;
+    int pointsServicePlayer;
+    int pointsReturnPlayer;
 
+    public TennisGame(String playerToServe, String playerToReturn){
+        this.servicePlayer = playerToServe;
+        this.returnPlayer = playerToReturn;
+        this.pointsServicePlayer = 0;
+        this.pointsReturnPlayer = 0;
     }
 
     public String getResult() {
-        return "Love all";
+        String result = "Love all";
+        if(this.pointsServicePlayer==1 && this.pointsReturnPlayer==0){
+            result = "15 love";
+        }
+        return result;
+    }
+
+    public void makePoint(String playerName) {
+        if(playerName.equals(this.servicePlayer)){
+            this.pointsServicePlayer++;
+        }
     }
 }

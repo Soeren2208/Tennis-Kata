@@ -21,5 +21,11 @@ public class TennisGameTest {
         assertThat(result, is("Love all"));
     }
 
+    @Test
+    public void givenServicePlayerWonPoint_WhenGetResult_Then15Love(){
+        this.game.makePoint("Federer");
+        assertThat(this.game.getResult(), is("15 love"));
+    }
+
 
 }
