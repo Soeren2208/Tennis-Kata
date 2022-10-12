@@ -27,5 +27,13 @@ public class TennisGameTest {
         assertThat(this.game.getResult(), is("15 love"));
     }
 
+    @Test
+    public void givenServicePlayerWonTwoPoints_WhenGetResult_Then30love(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        assertThat(this.game.getResult(), is("30 love"));
+
+    }
+
 
 }
