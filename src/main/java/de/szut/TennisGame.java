@@ -9,8 +9,9 @@ public class TennisGame {
     String returnPlayer;
     int pointsServicePlayer;
     int pointsReturnPlayer;
+    private boolean gameOver=false;
 
-    private Map<Integer, String> scoreMap;
+    private final Map<Integer, String> scoreMap;
 
     public TennisGame(String playerToServe, String playerToReturn){
         this.servicePlayer = playerToServe;
@@ -36,7 +37,7 @@ public class TennisGame {
         String result;
 
         if(isWin()){
-            result = "Game " + getPlayerNameWhoscoredMore();
+            result = "Game " + getPlayerNameWhoScoredMore();
         }
         else if(isDeuce()){
             result = "Deuce";
@@ -45,7 +46,7 @@ public class TennisGame {
             result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
         }
         else if(isAdvantage()){
-            result = "Advantage "+ getPlayerNameWhoscoredMore();
+            result = "Advantage "+ getPlayerNameWhoScoredMore();
         }
         else{
             result = this.scoreMap.get(this.pointsServicePlayer) + " " + this.scoreMap.get(this.pointsReturnPlayer);
@@ -61,7 +62,7 @@ public class TennisGame {
         return this.pointsServicePlayer == this.pointsReturnPlayer && this.pointsServicePlayer>=3;
     }
 
-    private String getPlayerNameWhoscoredMore() {
+    private String getPlayerNameWhoScoredMore() {
         if(this.pointsServicePlayer> this.pointsReturnPlayer){
             return this.servicePlayer;
         }
@@ -87,14 +88,19 @@ public class TennisGame {
     }
 
     public void makePoint(String playerName) {
-        if(playerName.equals(this.servicePlayer)){
-            this.pointsServicePlayer++;
+        if(!this.gameOver){
+            if(playerName.equals(this.servicePlayer)){
+                this.pointsServicePlayer++;
+            }
+            else if(playerName.equals(this.returnPlayer)){
+                this.pointsReturnPlayer++;
+            }
+            else{
+                throw new IllegalArgumentException("Wrong playername!");
+            }
         }
-        else if(playerName.equals(this.returnPlayer)){
-            this.pointsReturnPlayer++;
-        }
-        else{
-            throw new IllegalArgumentException("Wrong playername!");
+        if (isWin()){
+            this.gameOver = true;
         }
     }
 }

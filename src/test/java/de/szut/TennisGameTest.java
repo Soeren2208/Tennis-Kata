@@ -97,6 +97,19 @@ public class TennisGameTest {
         assertThat(this.game.getResult(), is(equalTo("Game Nadal")));
     }
 
+    @Test
+    public void givenWonGame_WhenMakePoint_ThenGame(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Federer");
+        assertThat(this.game.getResult(), is(equalTo("Game Nadal")));
+    }
 
 
 }
