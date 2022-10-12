@@ -18,12 +18,6 @@ public class TennisGameTest {
     }
 
     @Test
-    public void givenNoPointPlay_WhenGetResult_ThenReturnLove(){
-        String result = this.game.getResult();
-        assertThat(result, is("Love all"));
-    }
-
-    @Test
     public void givenServicePlayerWonPoint_WhenGetResult_Then15Love(){
         this.game.makePoint("Federer");
         assertThat(this.game.getResult(), is("15 love"));
@@ -48,6 +42,13 @@ public class TennisGameTest {
     public void givenWrongPlayerName_WhenMakePoint_ThenThrowIllegalArgumentException(){
         Exception e = assertThrows(IllegalArgumentException.class, ()-> this.game.makePoint("falscher Name"));
         assertThat(e.getMessage(), is(equalTo("Wrong playername!")));
+    }
+
+    @Test
+    public void givenDraw_WhenGetResult_ThenReturnScoreWithAll(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        assertThat(this.game.getResult(), is(equalTo("15 all")));
     }
 
 

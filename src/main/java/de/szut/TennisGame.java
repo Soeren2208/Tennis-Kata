@@ -17,7 +17,7 @@ public class TennisGame {
         this.returnPlayer = playerToReturn;
         this.pointsServicePlayer = 0;
         this.pointsReturnPlayer = 0;
-        this.scoreMap = new HashMap<Integer, String>();
+        this.scoreMap = new HashMap<>();
         fillScoreMap();
     }
 
@@ -29,20 +29,22 @@ public class TennisGame {
     }
 
     public String getResult() {
-        String result = translateScore();
-        return result;
+        return translateScore();
     }
 
     private String translateScore() {
-        String result="";
-        if(this.pointsServicePlayer==0 && this.pointsReturnPlayer==0){
-            result = "Love all";
+        String result;
+        if(isDraw()){
+            result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
         }
         else{
             result = this.scoreMap.get(this.pointsServicePlayer) + " " + this.scoreMap.get(this.pointsReturnPlayer);
         }
         return result;
+    }
 
+    private boolean isDraw(){
+        return this.pointsServicePlayer == this.pointsReturnPlayer && this.pointsServicePlayer<=3;
     }
 
     public void makePoint(String playerName) {
