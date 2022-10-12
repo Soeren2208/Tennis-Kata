@@ -37,14 +37,30 @@ public class TennisGame {
         if(isDraw()){
             result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
         }
+        else if(isWin()){
+            result = "Game " + getWinPlayerName();
+        }
         else{
             result = this.scoreMap.get(this.pointsServicePlayer) + " " + this.scoreMap.get(this.pointsReturnPlayer);
         }
         return result;
     }
 
+    private String getWinPlayerName() {
+        if(this.pointsServicePlayer> this.pointsReturnPlayer){
+            return this.servicePlayer;
+        }
+        else{
+            return this.returnPlayer;
+        }
+    }
+
     private boolean isDraw(){
         return this.pointsServicePlayer == this.pointsReturnPlayer && this.pointsServicePlayer<=3;
+    }
+
+    private boolean isWin(){
+        return this.pointsServicePlayer ==4 && this.pointsReturnPlayer<3 || this.pointsServicePlayer <3 && this.pointsReturnPlayer==4;
     }
 
     public void makePoint(String playerName) {

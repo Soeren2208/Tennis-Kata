@@ -51,5 +51,15 @@ public class TennisGameTest {
         assertThat(this.game.getResult(), is(equalTo("15 all")));
     }
 
+    @Test
+    public void givenWinGame_WhenGetResult_ThenReturnGame(){
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Nadal");
+        this.game.makePoint("Federer");
+        this.game.makePoint("Federer");
+        assertThat(this.game.getResult(), is(equalTo("Game Federer")));
+    }
+
 
 }
