@@ -34,16 +34,24 @@ public class TennisGame {
 
     private String translateScore() {
         String result;
-        if(isDraw()){
-            result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
-        }
-        else if(isWin()){
+
+        if(isWin()){
             result = "Game " + getWinPlayerName();
+        }
+        else if(isDeuce()){
+            result = "Deuce";
+        }
+        else if(isDraw()){
+            result = this.scoreMap.get(this.pointsServicePlayer)+ " all";
         }
         else{
             result = this.scoreMap.get(this.pointsServicePlayer) + " " + this.scoreMap.get(this.pointsReturnPlayer);
         }
         return result;
+    }
+
+    private boolean isDeuce() {
+        return this.pointsServicePlayer == this.pointsReturnPlayer && this.pointsServicePlayer>=3;
     }
 
     private String getWinPlayerName() {
